@@ -38,6 +38,10 @@ func RegisterRoutes(r *gin.RouterGroup) {
 	r.POST("/gluster/volume/grow", growVolumeHandler)
 }
 
+func RegisterSecRoutes(r *gin.RouterGroup) {
+	r.POST("/gluster/volume/fix", fixVolumeHandler)
+}
+
 func getProjectAdminsAndOperators(project string) ([]string, []string, error) {
 	policyBindings, err := getPolicyBindings(project)
 	if err != nil {

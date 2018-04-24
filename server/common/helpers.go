@@ -32,6 +32,11 @@ func ValidateIntInput(maxValue string, input string) error {
 
 // GetUserName returns the username based of the gin.Context
 func GetUserName(c *gin.Context) string {
+	// AuthUserKey is set by basic auth
+	user, exists := c.Get(gin.AuthUserKey)
+	if exists {
+		return user.(string)
+	}
 	jwtClaims := jwt.ExtractClaims(c)
 	return jwtClaims["id"].(string)
 }
